@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">DMT</string>
+    <string name="label_cancel">取消</string>
+    <string name="label_ok">确认</string>
+     <string name="permission_title_rationale">权限要求</string> 
+    <string name="permission_camera_rationale">需要拍照权限</string> 
+    <string name="permission_send_sms_rationale">需要发送短信权限</string> 
+    <string name="permission_read_storage_rationale">选择照片需存储读取权限.</string> 
+    <string name="permission_write_storage_rationale">保存照片需存储写入权限.</string>
+    <!--拍照-->
+     <string name="info_choose_from_album">从手机相册选取</string> 
+    <string name="info_choose_from_camera">拍照</string>
+    <string name="info_choose_cancel">取消</string>
+
+    <string name="info_add">添加</string>
+    <string name="info_edit">编辑</string>
+    <string name="info_delete">删除</string>
+    <string name="info_setting">设置</string>
+    <string name="info_finish">完成</string>
+    <string name="info_submit">提交</string>
+    <string name="info_sure">确认</string>
+    <string name="info_cancel">取消</string>
+    <string name="info_second">秒</string>
 </resources>

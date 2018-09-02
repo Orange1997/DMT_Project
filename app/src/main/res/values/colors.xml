@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">@color/white</color>
+    <color name="colorPrimaryDark">@color/theme</color>
+    <color name="colorAccent">@color/theme_secondary_1</color>
+    <!--主题色-->
+    <color name="theme">#FF007159</color>
+    <!--辅色1-->
+    <color name="theme_secondary_1">#FF007159</color>
+    <!--主要文字颜色-->
+    <color name="tv_color_primary">#FF333333</color>
+    <!--辅助文字颜色-->
+    <color name="tv_color_secondary">#FFA2ACB5</color>
+    <!--标题文字颜色-->
+    <color name="tv_color_primary_title">@color/theme</color>
+    <!--占位符文字颜色-->
+    <color name="tv_color_primary_hint">#999999</color>
+    <!--背景色-->
+    <color name="background">#F8F8F8</color>
+    <color name="background_list_green">#14007159</color>
+
+    <color name="state_color_no_available">#a2acb5</color>
+    <color name="tv_color_actionbar">@color/theme</color>
+    <color name="tv_color_menu">@color/theme</color>
+
+    <!--白色-->
+    <color name="white">#ffffff</color>
+    <!--透明色-->
+    <color name="transparent">#00ffffff</color>
+
+    <!--分割线或者边框灰-->
+    <color name="gray_divider">#838383</color>
+    <color name="white_50">#80ffffff</color>
+    <color name="white_60">#99ffffff</color>
+
+    <color name="bg_btn_orange">#FFF59B02</color>
 </resources>
