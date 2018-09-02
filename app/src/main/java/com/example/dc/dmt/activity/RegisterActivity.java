@@ -1,6 +1,5 @@
 package com.example.dc.dmt.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
@@ -12,10 +11,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.dc.dmt.R;
+import com.example.dc.dmt.ui.CenterTitleActionbar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,17 +24,24 @@ import butterknife.OnClick;
  * Created by DC on 2018/9/2.
  */
 
-public class LoginActivity extends BaseActivity {
-    @BindView(R.id.iv_logo)
-    ImageView ivLogo;
+public class RegisterActivity extends BaseActivity {
+
+    @BindView(R.id.toolbar)
+    CenterTitleActionbar toolbar;
     @BindView(R.id.et_user_name)
     EditText etUserName;
+    @BindView(R.id.et_email)
+    EditText etEmail;
     @BindView(R.id.et_psd)
     EditText etPsd;
-    @BindView(R.id.btn_login)
-    Button btnLogin;
     @BindView(R.id.cb_pwd_eye)
     CheckBox cbPwdEye;
+    @BindView(R.id.et_confirm_psd)
+    EditText etConfirmPsd;
+    @BindView(R.id.cb_pwd_eye_confirm)
+    CheckBox cbPwdEyeConfirm;
+    @BindView(R.id.btn_register)
+    Button btnRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +55,10 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        setContentView (R.layout.activity_login);
+        setContentView (R.layout.activity_register);
         ButterKnife.bind (this);
-
+        initActionBar (toolbar);
+        toolbar.setTitle ("注  册");
         cbPwdEye.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -61,6 +68,20 @@ public class LoginActivity extends BaseActivity {
                     Selection.setSelection(editable, editable.length());
                 } else {
                     etPsd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    Editable editable = etPsd.getText();
+                    Selection.setSelection(editable, editable.length());
+                }
+            }
+        });
+        cbPwdEyeConfirm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    etConfirmPsd.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD | InputType.TYPE_CLASS_TEXT);
+                    Editable editable = etPsd.getText();
+                    Selection.setSelection(editable, editable.length());
+                } else {
+                    etConfirmPsd.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     Editable editable = etPsd.getText();
                     Selection.setSelection(editable, editable.length());
                 }
@@ -85,7 +106,25 @@ public class LoginActivity extends BaseActivity {
                 }
             }
         });
+        etConfirmPsd.addTextChangedListener (new TextWatcher () {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                cbPwdEyeConfirm.setVisibility (View.VISIBLE);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (TextUtils.isEmpty (etPsd.getText ())){
+                    cbPwdEyeConfirm.setVisibility (View.GONE);
+                }else {
+                    cbPwdEyeConfirm.setVisibility (View.VISIBLE);
+                }
+            }
+        });
     }
 
     @Override
@@ -94,21 +133,24 @@ public class LoginActivity extends BaseActivity {
         //Todo:加载数据
     }
 
-    @OnClick({R.id.btn_login,R.id.tv_to_register})
+    @OnClick({R.id.btn_register})
     public void onViewClicked(View view) {
         switch (view.getId ()) {
-            case R.id.btn_login:
+            case R.id.btn_register:
                 if (TextUtils.isEmpty (etUserName.getText ())) {
-                    Toast.makeText (this, "请输入用户名或邮箱", Toast.LENGTH_SHORT).show ();
+                    Toast.makeText (this, "请输入用户名", Toast.LENGTH_SHORT).show ();
+                } else if (TextUtils.isEmpty (etEmail.getText ())) {
+                    Toast.makeText (this, "请输入邮箱", Toast.LENGTH_SHORT).show ();
                 } else if (TextUtils.isEmpty (etPsd.getText ())) {
                     Toast.makeText (this, "请输入密码", Toast.LENGTH_SHORT).show ();
+                } else if (TextUtils.isEmpty (etConfirmPsd.getText ())) {
+                    Toast.makeText (this, "请输入确认密码", Toast.LENGTH_SHORT).show ();
+                } else if (!etPsd.getText ().toString ().equals (etConfirmPsd.getText ().toString ())) {
+                    Toast.makeText (this, "两次密码不一致", Toast.LENGTH_SHORT).show ();
                 } else {
-                    //todo:登录
-                    Toast.makeText (this, "登录", Toast.LENGTH_SHORT).show ();
+                    //todo:注册
+                    Toast.makeText (this, "注册", Toast.LENGTH_SHORT).show ();
                 }
-                break;
-            case R.id.tv_to_register:
-                startActivity (new Intent (this,RegisterActivity.class));
                 break;
         }
 
